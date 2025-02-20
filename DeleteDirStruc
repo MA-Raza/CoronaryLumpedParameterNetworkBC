@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Deleting directory structure..."
+
+rm -r LPNBCTestCase_*
+
+echo "Directory structure deletion completed!"

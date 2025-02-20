@@ -1,0 +1,3 @@
+windkesselOutletPressure/windkesselOutletPressureFvPatchScalarField.C
+coronaryOutletPressure/coronaryOutletPressureFvPatchScalarField.C
+LIB = $(FOAM_USER_LIBBIN)/liblumpedParameterNetworkBC

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Compiling liblumpedParameterNetworkBC..."
+
+wmake libso
+
+echo "liblumpedParameterNetworkBC is compiled and ready for the use!"

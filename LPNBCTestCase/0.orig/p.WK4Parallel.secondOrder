@@ -1,0 +1,48 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     4.1                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    inlet
+    {
+        type            zeroGradient;
+    }
+
+    outlet
+    {
+        type                windkesselOutletPressure;
+        windkesselModel     WK4Parallel;
+        diffScheme          secondOrder;
+        Rp                  1.3997e+10; // Proximal resistance in [kgm^-4s^-1]
+        Rd                  141520000;  // Distal resistance in [kgm^-4s^-1]
+        C                   1.0000e-08; // Compliance in [m^4s^2kg^-1]
+        L                   1.7995e+03; // Blood inertance in [kgm^-4]
+        Pd                  0;          // Distal pressure in [Pa]
+        value               uniform 0;
+    }
+
+    walls
+    {
+        type            zeroGradient;
+    }
+
+}
+
+// ************************************************************************* //

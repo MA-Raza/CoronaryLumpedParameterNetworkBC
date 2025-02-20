@@ -1,0 +1,84 @@
+#!/bin/bash
+
+echo "Creating directory structure..."
+
+# Base directory name
+base_dir="LPNBCTestCase"
+
+# Array of simulation types and schemes
+simulations=("Resistive" "WK2" "WK3" "WK4Series" "WK4Parallel" "Coronary")
+schemes=("firstOrder" "secondOrder")
+
+# Function to copy and create directory structure
+create_simulation_structure() {
+    sim=$1
+    scheme=$2
+
+    # Define new simulation directory
+    sim_dir="${base_dir}_${sim}_${scheme}"
+
+    echo "Creating directory structure for ${sim_dir}..."
+
+    # Create base directories
+    mkdir -p "${sim_dir}/0" "${sim_dir}/constant/polyMesh" "${sim_dir}/system" "${sim_dir}/DataFiles"
+
+    # Handle U file
+    if [[ "${sim}" == "Coronary" ]]; then
+        cp "${base_dir}/0.orig/U.Coronary" "${sim_dir}/0/U"
+    else
+        cp "${base_dir}/0.orig/U.WK" "${sim_dir}/0/U"
+    fi
+
+    # Handle p file
+    if [[ "${sim}" == "Resistive" ]]; then
+        cp "${base_dir}/0.orig/p.Resistive" "${sim_dir}/0/p"
+    else
+        cp "${base_dir}/0.orig/p.${sim}.${scheme}" "${sim_dir}/0/p"
+    fi
+
+    # Copy constant files
+    cp -r "${base_dir}/constant/"* "${sim_dir}/constant/"
+    rm -r "${sim_dir}/constant/polyMesh/blockMeshDict.m4."*
+
+    # Handle blockMeshDict
+    if [[ "${sim}" == "Coronary" ]]; then
+        cp "${base_dir}/constant/polyMesh/blockMeshDict.m4.Coronary" "${sim_dir}/constant/polyMesh/blockMeshDict.m4"
+    else
+        cp "${base_dir}/constant/polyMesh/blockMeshDict.m4.WK" "${sim_dir}/constant/polyMesh/blockMeshDict.m4"
+    fi
+
+    # Handle DataFiles
+    if [[ "${sim}" == "Coronary" ]]; then
+        cp "${base_dir}/DataFiles/CoronaryInletFlowRate" "${sim_dir}/DataFiles/"
+        cp "${base_dir}/DataFiles/PimData" "${sim_dir}/DataFiles/"
+    else
+        cp "${base_dir}/DataFiles/AorticInletFlowRate" "${sim_dir}/DataFiles/"
+    fi
+
+    # Copy system files
+    cp -r "${base_dir}/system/"* "${sim_dir}/system/"
+
+    # Handle Allrun and Allclean scripts
+    if [[ "${sim}" == "Coronary" ]]; then
+        cp "${base_dir}/Allrun.Coronary" "${sim_dir}/Allrun"
+        cp "${base_dir}/Allclean.Coronary" "${sim_dir}/Allclean"
+        chmod +x ${sim_dir}/Allrun ${sim_dir}/Allclean
+    else
+        cp "${base_dir}/Allrun.WK" "${sim_dir}/Allrun"
+        cp "${base_dir}/Allclean.WK" "${sim_dir}/Allclean"
+        chmod +x ${sim_dir}/Allrun ${sim_dir}/Allclean
+    fi
+}
+
+# Loop through all simulations and schemes
+for sim in "${simulations[@]}"; do
+    if [[ "${sim}" == "Resistive" ]]; then
+        create_simulation_structure "$sim" ""
+    else
+        for scheme in "${schemes[@]}"; do
+            create_simulation_structure "$sim" "$scheme"
+        done
+    fi
+done
+
+echo "Directory structure creation complete!"

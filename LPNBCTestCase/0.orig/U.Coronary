@@ -1,0 +1,45 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     4.1                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+boundaryField
+{
+    inlet
+    {
+        type                timeVaryingFlowRateInletVelocity;
+        flowRate            0;               // Volumetric/mass flow rate [m3/s or kg/s]
+        value               uniform (0 0 0); // placeholder
+        "file|fileName"     "$FOAM_CASE/DataFiles/CoronaryInletFlowRate";
+        outOfBounds         repeat;          // (error|warn|clamp|repeat)
+    }
+
+    outlet
+    {
+        type            zeroGradient;
+    }
+
+    walls
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+}
+
+// ************************************************************************* //

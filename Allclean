@@ -1,0 +1,96 @@
+#!/bin/bash
+
+echo "Cleaning lumpedParameterNetworkBC..."
+
+cd lumpedParameterNetworkBC/
+
+./Allwclean
+
+cd ../
+
+echo "Cleaning all cases, one by one..."
+
+cd LPNBCTestCase_Resistive_/
+
+echo "Cleaning LPNBCTestCase_Resistive_ case..."
+
+./Allclean
+
+cd ../LPNBCTestCase_WK2_firstOrder
+
+echo "Cleaning LPNBCTestCase_WK2_firstOrder case..."
+
+./Allclean
+
+cd ../LPNBCTestCase_WK2_secondOrder
+
+echo "Cleaning LPNBCTestCase_WK2_secondOrder case..."
+
+./Allclean
+
+cd ../LPNBCTestCase_WK3_firstOrder
+
+echo "Cleaning LPNBCTestCase_WK3_firstOrder case..."
+
+./Allclean
+
+cd ../LPNBCTestCase_WK3_secondOrder
+
+echo "Cleaning LPNBCTestCase_WK3_secondOrder case..."
+
+./Allclean
+
+cd ../LPNBCTestCase_WK4Series_firstOrder
+
+echo "Cleaning LPNBCTestCase_WK4Series_firstOrder case..."
+
+./Allclean
+
+cd ../LPNBCTestCase_WK4Series_secondOrder
+
+echo "Cleaning LPNBCTestCase_WK4Series_secondOrder case..."
+
+./Allclean
+
+cd ../LPNBCTestCase_WK4Parallel_firstOrder
+
+echo "Cleaning LPNBCTestCase_WK4Parallel_firstOrder case..."
+
+./Allclean
+
+cd ../LPNBCTestCase_WK4Parallel_secondOrder
+
+echo "Cleaning LPNBCTestCase_WK4Parallel_secondOrder case..."
+
+./Allclean
+
+cd ../LPNBCTestCase_Coronary_firstOrder
+
+echo "Cleaning LPNBCTestCase_Coronary_firstOrder case..."
+
+./Allclean
+
+cd ../LPNBCTestCase_Coronary_secondOrder
+
+echo "Cleaning LPNBCTestCase_Coronary_secondOrder case..."
+
+./Allclean
+
+cd ../
+
+echo "All cases are cleaned!"
+
+echo "Cleaning Postprocessing Results..."
+
+cd MATLABPostprocessing/
+
+\rm -f *.eps *.png *.jpg
+
+echo "Postprocessing Results are cleaned!"
+
+cd ../
+
+echo "Current directory:"
+
+pwd
+

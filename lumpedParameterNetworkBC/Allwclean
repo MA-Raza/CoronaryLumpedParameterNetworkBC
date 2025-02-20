@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Cleaning liblumpedParameterNetworkBC..."
+
+wclean libso
+
+echo "liblumpedParameterNetworkBC is cleaned and ready for Recompilation!"

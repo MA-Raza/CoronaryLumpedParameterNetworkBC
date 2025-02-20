@@ -1,0 +1,87 @@
+#!/bin/bash
+
+echo "Compiling lumpedParameterNetworkBC..."
+
+cd lumpedParameterNetworkBC/
+
+./Allwmake
+
+cd ../
+
+echo "Running all cases, one by one..."
+
+cd LPNBCTestCase_Resistive_/
+
+echo "Running LPNBCTestCase_Resistive_ case..."
+
+./Allrun
+
+cd ../LPNBCTestCase_WK2_firstOrder
+
+echo "Running LPNBCTestCase_WK2_firstOrder case..."
+
+./Allrun
+
+cd ../LPNBCTestCase_WK2_secondOrder
+
+echo "Running LPNBCTestCase_WK2_secondOrder case..."
+
+./Allrun
+
+cd ../LPNBCTestCase_WK3_firstOrder
+
+echo "Running LPNBCTestCase_WK3_firstOrder case..."
+
+./Allrun
+
+cd ../LPNBCTestCase_WK3_secondOrder
+
+echo "Running LPNBCTestCase_WK3_secondOrder case..."
+
+./Allrun
+
+cd ../LPNBCTestCase_WK4Series_firstOrder
+
+echo "Running LPNBCTestCase_WK4Series_firstOrder case..."
+
+./Allrun
+
+cd ../LPNBCTestCase_WK4Series_secondOrder
+
+echo "Running LPNBCTestCase_WK4Series_secondOrder case..."
+
+./Allrun
+
+cd ../LPNBCTestCase_WK4Parallel_firstOrder
+
+echo "Running LPNBCTestCase_WK4Parallel_firstOrder case..."
+
+./Allrun
+
+cd ../LPNBCTestCase_WK4Parallel_secondOrder
+
+echo "Running LPNBCTestCase_WK4Parallel_secondOrder case..."
+
+./Allrun
+
+cd ../LPNBCTestCase_Coronary_firstOrder
+
+echo "Running LPNBCTestCase_Coronary_firstOrder case..."
+
+./Allrun
+
+cd ../LPNBCTestCase_Coronary_secondOrder
+
+echo "Running LPNBCTestCase_Coronary_secondOrder case..."
+
+./Allrun
+
+cd ../
+
+echo "All simulations are completed!"
+
+echo "Current directory:"
+
+pwd
+
+echo "Run the MATLAB scripts in MATLABPostprocessing folder for the postprocessing!"

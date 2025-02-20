@@ -1,0 +1,51 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     4.1                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    inlet
+    {
+        type            zeroGradient;
+    }
+
+    outlet
+    { 
+        type            coronaryOutletPressure;
+        Ra              1.0179e+10;    // Arterial resistance [kg m^-4 s^-1]
+        Ram             1.6541e+10;    // Micro-arterial resistance [kg m^-4 s^-1]
+        Rv              5.0896e+09;    // Veinous resistance [kg m^-4 s^-1]
+        Rvm             0;             // Micro-veinous resistance [kg m^-4 s^-1]
+        Ca              8.6482e-12;    // Arterial compliance [m^4 s^2 kg^-1]
+        Cim             6.9972e-11;    // Intramyocardial compliance [m^4 s^2 kg^-1]
+        PimScaling      1.5;           // Intramyocardial pressure scaling (1.5 for LCA, 0.5 for RCA)
+        Pv              0;             // Distal pressure [Pa]
+        diffScheme      secondOrder;
+        PimFile         "$FOAM_CASE/DataFiles/PimData"; // File containing intramyocardial pressure data
+        value           uniform 0; // Initial value for pressure [Pa]
+    }
+
+    walls
+    {
+        type            zeroGradient;
+    }
+
+}
+
+// ************************************************************************* //
