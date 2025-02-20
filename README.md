@@ -1,4 +1,4 @@
-#Implementation of Lumped Parameter Network Boundary Conditions for the Patient-Specific CFD/FSI Simulations of Coronary Arteries in OpenFOAM
+# Implementation of Lumped Parameter Network Boundary Conditions for the Patient-Specific CFD/FSI Simulations of Coronary Arteries in OpenFOAM
 
 - A working installation of solids4Foam-v2.1 with foam-extend-4.1
 is required to compile the BCs and run the tuturial case.
